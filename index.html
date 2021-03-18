@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <title>Ansiktbok</title>
+    </head>
+    <body>
+        <div id="Messages">
+        <br>
+        <br>
+        </div>
+        <div id="textmessagebox">
+            <br>
+            <div id="elements">
+                <textarea id="in" rows="4" cols="50" id="text"></textarea>
+                <button onclick="Send()">Send</button> 
+                <button onclick="swit()">ChangeUser</button>
+                <p id="user">Current user: left</p>
+            </div>        
+        </div>
+    </body>
+    <script>
+        var input = document.getElementById("in");
+        var msgs = document.getElementById("Messages");
+        var msgcount = 0;
+        var leftuser = true;
+        function swit(){
+            switch (leftuser) {
+                case false:
+                    leftuser = true;
+                    document.getElementById("user").style.color="blue";
+                    document.getElementById("user").innerHTML = "Current user: left";
+                    break;
+                case true:
+                    leftuser = false;
+                    document.getElementById("user").style.color="red";
+                    document.getElementById("user").innerHTML = "Current user: right";
+                    break;
+            }
+        }
+        function Send(){
+            if (input.value != ""){
+                if (leftuser){
+                    msgs.innerHTML += "<div id=\"msg" + msgcount+"\">" + "<p>" + input.value+"</p>" + "</div>";
+                    document.getElementById("msg"+msgcount).style.textAlign="left";
+                    document.getElementById("msg"+msgcount).style.color="blue";
+                }else{
+                    msgs.innerHTML += "<div id=\"msg" + msgcount+"\">" + "<p>" + input.value+"</p>" + "</div>";
+                    document.getElementById("msg"+msgcount).style.textAlign="right";
+                    document.getElementById("msg"+msgcount).style.color="red";
+                }
+                input.value = "";
+                msgcount++;
+            }
+        }
+    </script>
+    <style>
+        body{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background-color: rgb(31, 28, 28);
+        }
+        #textmessagebox{
+            width: 100%;
+            text-align: center;
+            position: fixed;
+            bottom: 10px;
+            height: 15%;
+            background-color: black;
+        }
+        #user{
+            color: blue;
+            position: fixed;
+            bottom: 35px;
+            left: 20%;
+        }
+    </style>
+</html>
